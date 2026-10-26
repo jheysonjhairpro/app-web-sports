@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="./public/logo-main.png" width="80" alt="AbanPlay Logo" />
+  <img src="public/logo-main.png" width="80" alt="AbanPlay Logo" />
 
   # ⚽ AbanPlay
 
@@ -17,7 +17,7 @@
 
   <br />
 
-  <img src="./public/banner.png" alt="AbanPlay Interface" width="85%" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+  <img src="public/banner.png" alt="AbanPlay Interface" width="85%" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
 
 </div>
 
