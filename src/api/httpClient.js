@@ -18,12 +18,47 @@ http.interceptors.request.use((config) => {
 // Normaliza errores y avisa a la app si la sesión expiró.
 http.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
     const apiError = normalizeApiError(error);
-    if (apiError.status === 401) {
-      tokenStorage.clear();
-      window.dispatchEvent(new Event('auth:expired'));
+
+    // Si el error es 401 y no se ha intentado refrescar esta petición
+    if (apiError.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const refreshToken = tokenStorage.getRefresh();
+
+        // Si no hay refresh token guardado, borramos todo y notificamos
+        if (!refreshToken) {
+          tokenStorage.clear();
+          window.dispatchEvent(new Event('auth:expired'));
+          return Promise.reject(apiError);
+        }
+
+        // Petición directa al backend para obtener nuevo token
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_URL}/auth/refresh`,
+          { refreshToken }
+        );
+
+        // Guardamos el nuevo accessToken (y nuevo refreshToken si la API devuelve uno nuevo)
+        tokenStorage.setSession({
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken || refreshToken,
+        });
+
+        // Actualizamos el header de la petición que había fallado y la reintentamos
+        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+        return http(originalRequest);
+      } catch (refreshError) {
+        // Si el refreshToken también expiró o falló la renovación
+        tokenStorage.clear();
+        window.dispatchEvent(new Event('auth:expired'));
+        return Promise.reject(normalizeApiError(refreshError));
+      }
     }
+
     return Promise.reject(apiError);
   }
 );
