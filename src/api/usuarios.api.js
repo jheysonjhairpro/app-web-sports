@@ -21,3 +21,10 @@ export async function cambiarEstadoUsuario(id, activo) {
   const { data } = await http.patch(`/usuarios/${id}`, { activo });
   return data;
 }
+
+// PATCH {{baseUrl}}/usuarios/:id   [Super] Actualizar datos de usuario (nombre, teléfono, etc.)
+// body: { nombre, telefono }
+export async function actualizarUsuario(id, datos) {
+  const { data } = await http.patch(`/usuarios/${id}`, datos);
+  return data;
+}
