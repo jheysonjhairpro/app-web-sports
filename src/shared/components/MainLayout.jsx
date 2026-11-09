@@ -78,42 +78,42 @@ export default function MainLayout() {
           -webkit-font-smoothing: antialiased;
         }
 
-.ml-shell {
-  display: flex;
-  height: 100vh; /* 👈 Alto fijo a la ventana completa */
-  width: 100vw;
-  background-color: #f8fafc;
-  overflow: hidden; /* 👈 Evita que el contenedor raíz haga scroll */
-}
+        .ml-shell {
+          display: flex;
+          height: 100vh; /* 👈 Alto fijo a la ventana completa */
+          width: 100vw;
+          background-color: #f8fafc;
+          overflow: hidden; /* 👈 Evita que el contenedor raíz haga scroll */
+        }
 
-/* --- SIDEBAR BARRA LATERAL --- */
-.ml-sidebar {
-  width: 270px;
-  min-width: 270px;
-  height: 100vh; /* 👈 Cubre siempre el 100% vertical */
-  background: #06110d;
-  background-image: 
-    radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.2) 0%, transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(5, 150, 105, 0.12) 0%, transparent 45%);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.75rem 1.25rem;
-  position: relative; /* 👈 Cambiado de sticky a relative dentro del flex */
-  z-index: 50;
-  flex-shrink: 0;
-}
+        /* --- SIDEBAR BARRA LATERAL --- */
+        .ml-sidebar {
+          width: 270px;
+          min-width: 270px;
+          height: 100vh; /* 👈 Cubre siempre el 100% vertical */
+          background: #06110d;
+          background-image: 
+            radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.2) 0%, transparent 40%),
+            radial-gradient(circle at 90% 90%, rgba(5, 150, 105, 0.12) 0%, transparent 45%);
+          border-right: 1px solid rgba(255, 255, 255, 0.08);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 1.75rem 1.25rem;
+          position: relative; /* 👈 Cambiado de sticky a relative dentro del flex */
+          z-index: 50;
+          flex-shrink: 0;
+        }
 
-/* --- ÁREA PRINCIPAL CON SCROLL INDEPENDIENTE --- */
-.ml-main {
-  flex: 1;
-  min-width: 0;
-  height: 100vh; /* 👈 Alto igual a la ventana */
-  overflow-y: auto; /* 👈 El scroll ocurre ÚNICAMENTE dentro de las páginas */
-  background-color: #f8fafc;
-  padding: 2.5rem;
-}
+        /* --- ÁREA PRINCIPAL CON SCROLL INDEPENDIENTE --- */
+        .ml-main {
+          flex: 1;
+          min-width: 0;
+          height: 100vh; /* 👈 Alto igual a la ventana */
+          overflow-y: auto; /* 👈 El scroll ocurre ÚNICAMENTE dentro de las páginas */
+          background-color: #f8fafc;
+          padding: 2.5rem;
+        }
 
         .ml-brand {
           display: flex;
